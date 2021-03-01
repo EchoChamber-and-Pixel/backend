@@ -13,5 +13,8 @@ namespace backend.Models
         public int Teleports { get; set; }
         public int Time { get; set; }
         public DateTime Created { get; set; }
+
+        public Map Map { get; set; }
+        public Player Player { get; set; }
     }
 }

@@ -25,7 +25,10 @@ namespace backend
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<EchoContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("EchoContext")));
+                options
+                .UseNpgsql(Configuration.GetConnectionString("EchoContext"))
+                .UseSnakeCaseNamingConvention()
+            );
 
             services.AddCors(options =>
             {
