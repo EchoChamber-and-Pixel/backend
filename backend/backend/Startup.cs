@@ -26,8 +26,8 @@ namespace backend
         {
             services.AddDbContext<EchoContext>(options =>
                 options
-                .UseNpgsql(Configuration.GetConnectionString("EchoContext"))
-                .UseSnakeCaseNamingConvention()
+                    .UseNpgsql(Configuration.GetConnectionString("EchoContext"))
+                    .UseSnakeCaseNamingConvention()
             );
 
             services.AddCors(options =>
@@ -61,6 +61,9 @@ namespace backend
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                using var scope = app.ApplicationServices.CreateScope();
+                var db = scope.ServiceProvider.GetRequiredService<EchoContext>();
+                db.Database.EnsureCreated();
             }
 
             app.UseSwagger();
