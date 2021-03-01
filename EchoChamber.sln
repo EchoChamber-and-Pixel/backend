@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backend", "backend\backend.csproj", "{11DFB36A-19FA-41F7-8C05-817700484923}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EchoChamber.API", "EchoChamber.API\EchoChamber.API.csproj", "{11DFB36A-19FA-41F7-8C05-817700484923}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

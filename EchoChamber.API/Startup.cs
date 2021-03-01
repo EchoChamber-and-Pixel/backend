@@ -1,4 +1,4 @@
-using backend.Data;
+using EchoChamber.API.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +10,7 @@ using System;
 using System.IO;
 using System.Reflection;
 
-namespace backend
+namespace EchoChamber.API
 {
     public class Startup
     {
