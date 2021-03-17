@@ -1,7 +1,7 @@
-using backend.Models;
+using EchoChamber.API.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace backend.Data
+namespace EchoChamber.API.Data
 {
     public class EchoContext : DbContext
     {

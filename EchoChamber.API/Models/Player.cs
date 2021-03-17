@@ -1,6 +1,6 @@
 using System;
 
-namespace backend.Models
+namespace EchoChamber.API.Models
 {
     public class Player
     {
