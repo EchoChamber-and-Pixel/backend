@@ -11,7 +11,7 @@ namespace EchoChamber.API.Models
         public int Style { get; set; }
         public int Mode { get; set; }
         public int Teleports { get; set; }
-        public int Time { get; set; }
+        public long Time { get; set; }
         public DateTime Created { get; set; }
 
         public Map Map { get; set; }
