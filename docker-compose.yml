@@ -4,6 +4,7 @@ services:
   api:
     depends_on:
       - db
+    restart: unless-stopped
     build:
       context: .
     ports:
