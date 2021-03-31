@@ -5,10 +5,10 @@ using System.Collections.Generic;
 namespace EchoChamber.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class RecordsController : ControllerBase
     {
-        private readonly ILogger<RecordsController> _logger;
+        private readonly ILogger _logger;
 
         public RecordsController(ILogger<RecordsController> logger)
         {
