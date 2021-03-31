@@ -16,5 +16,6 @@ namespace EchoChamber.API.Models
 
         public Map Map { get; set; }
         public Player Player { get; set; }
+		public Replay Replay { get; set; }
     }
 }

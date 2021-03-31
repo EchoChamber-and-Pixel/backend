@@ -42,6 +42,10 @@ namespace EchoChamber.API.Data
                 .HasOne(p => p.Player)
                 .WithMany()
                 .HasForeignKey(r => r.SteamID64);
+			modelBuilder.Entity<Record>()
+                .HasOne(r => r.Replay)
+                .WithOne(r => r.Record)
+                .HasForeignKey<Replay>(r => r.Id);
         }
     }
 }
