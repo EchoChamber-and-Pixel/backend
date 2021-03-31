@@ -3,22 +3,22 @@ version: '3'
 services:
   api:
     depends_on:
-      - db
+      - postgresdb
     restart: unless-stopped
     build:
       context: .
     ports:
       - "8008:80"
 
-  db:
+  postgresdb:
     image: postgres:13
     restart: always
-    user: "1000:1000"
+    user: "1007:1007"
     environment:
       POSTGRES_USER: docker
       POSTGRES_PASSWORD: docker
       POSTGRES_DB: echodb
-    ports:
-      - "8009:5432"
+    # ports:
+    #  - "8009:5432"
     volumes:
       - ./postgres_db:/var/lib/postgresql/data
