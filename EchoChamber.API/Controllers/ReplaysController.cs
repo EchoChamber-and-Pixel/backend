@@ -1,5 +1,6 @@
 using EchoChamber.API.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -28,10 +29,10 @@ namespace EchoChamber.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult> Get(int id)
         {
-            var replay = await _db.Replays.FindAsync(id);
+            var replay = await _db.Replays.Include(r => r.Record).ThenInclude(r => r.Map).FirstOrDefaultAsync(r => r.Id == id);
             if (replay == null)
                 return NotFound("No such replay found");
-            return File(replay.Data, "application/octet-stream", $"{replay.Record.Map}_{replay.Record.SteamID64}_{replay.Record.Mode}_{replay.Record.Course}.replay");
+            return File(replay.Data, "application/octet-stream", $"{replay.Record.Map.Name}_{replay.Record.SteamID64}_{replay.Record.Mode}_{replay.Record.Course}.replay");
         }
     }
 }
