@@ -76,7 +76,7 @@ namespace EchoChamber.API
                 c.RoutePrefix = "api/swagger";
             });
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
 
             app.UseRouting();
 
