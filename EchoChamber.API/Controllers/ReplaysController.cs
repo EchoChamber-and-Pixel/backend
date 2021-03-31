@@ -26,7 +26,7 @@ namespace EchoChamber.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<FileContentResult>> Get(int id)
+        public async Task<ActionResult> Get(int id)
         {
             var replay = await _db.Replays.FindAsync(id);
             if (replay == null)
