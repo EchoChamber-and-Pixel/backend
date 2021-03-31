@@ -31,7 +31,7 @@ namespace EchoChamber.API.Controllers
             var replay = await _db.Replays.FindAsync(id);
             if (replay == null)
                 return NotFound("No such replay found");
-            return File(replay.Data, "application/octet-stream");
+            return File(replay.Data, "application/octet-stream", $"{replay.Record.Map}_{replay.Record.SteamID64}_{replay.Record.Mode}_{replay.Record.Course}.replay");
         }
     }
 }
