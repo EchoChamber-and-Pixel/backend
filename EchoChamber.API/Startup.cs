@@ -66,10 +66,14 @@ namespace EchoChamber.API
                 db.Database.EnsureCreated();
             }
 
-            app.UseSwagger();
+            app.UseSwagger(c =>
+            {
+                c.RouteTemplate = "api/swagger/{documentname}/swagger.json";
+            });
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "backend v1");
+                c.SwaggerEndpoint("/api/swagger/v1/swagger.json", "backend v1");
+                c.RoutePrefix = "api/swagger";
             });
 
             app.UseHttpsRedirection();
