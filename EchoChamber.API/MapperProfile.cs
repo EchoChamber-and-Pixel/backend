@@ -8,7 +8,8 @@ namespace EchoChamber.API
     {
         public MapperProfile()
         {
-            
+            CreateMap<Record, RecordView>()
+                .ForMember(r => r.ModeId, opt => opt.MapFrom(r => r.Mode));
         }
     }
 }
