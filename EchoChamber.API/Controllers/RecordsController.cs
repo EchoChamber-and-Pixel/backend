@@ -75,6 +75,12 @@ namespace EchoChamber.API.Controllers
                 query = query.Where(r => modes.Contains(r.Mode));
             }
 
+            if (recordParameter.After.HasValue)
+                query = query.Where(r => r.Created > recordParameter.After.Value);
+
+            if (recordParameter.Before.HasValue)
+                query = query.Where(r => r.Created < recordParameter.Before.Value);
+
             query = query.Skip(recordParameter.Offset.GetValueOrDefault(0));
             query = query.Take(recordParameter.Limit.GetValueOrDefault(100));
 

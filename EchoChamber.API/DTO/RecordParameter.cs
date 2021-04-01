@@ -1,3 +1,5 @@
+using System;
+
 namespace EchoChamber.API.DTO
 {
     public class RecordParameter : Parameter
@@ -10,5 +12,7 @@ namespace EchoChamber.API.DTO
         public int[] Style { get; set; }
         public bool? IsPro { get; set; } = null;
         public string[] Mode { get; set; }
+        public DateTime? Before { get; set; } = null;
+        public DateTime? After { get; set; } = null;
     }
 }
