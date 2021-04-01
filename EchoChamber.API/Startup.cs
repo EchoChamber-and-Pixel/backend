@@ -30,6 +30,8 @@ namespace EchoChamber.API
                     .UseSnakeCaseNamingConvention()
             );
 
+            services.AddAutoMapper(typeof(Startup));
+
             services.AddCors(options =>
             {
                 options.AddPolicy(name: "AllowOrigin",
