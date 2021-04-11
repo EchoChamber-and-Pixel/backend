@@ -43,7 +43,7 @@ namespace EchoChamber.API.Controllers
         private static long BaseSteamID64 = 76561197960265728;
 
         [HttpPost]
-        public async Task<int> Post()
+        public async Task<object> Post()
         {
             StringValues source;
             if (!Request.Headers.TryGetValue("Source", out source))
@@ -115,12 +115,17 @@ namespace EchoChamber.API.Controllers
                 };
                 await _db.Replays.AddAsync(replay2);
                 await _db.SaveChangesAsync();
-                return replay2.Id;
+                return new {
+                    Id = record.Id
+                };
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error uploading replay");
-                return -1;
+                return new {
+                    Id = -1,
+                    Message = "Unable to upload replay"
+                };
             }
         }
     }
