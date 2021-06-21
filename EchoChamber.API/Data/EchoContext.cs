@@ -26,9 +26,15 @@ namespace EchoChamber.API.Data
                 .HasIndex(m => m.Name)
                 .IsUnique();
             modelBuilder.Entity<Map>()
+                .Property(m => m.Id)
+                .ValueGeneratedOnAdd();
+            modelBuilder.Entity<Map>()
                 .Property(m => m.Created)
                 .HasDefaultValueSql("now()");
 
+            modelBuilder.Entity<Record>()
+                .Property(r => r.Id)
+                .ValueGeneratedOnAdd();
             modelBuilder.Entity<Record>()
                 .Property(r => r.Created)
                 .HasDefaultValueSql("now()");
@@ -36,6 +42,10 @@ namespace EchoChamber.API.Data
                 .HasOne(p => p.Player)
                 .WithMany()
                 .HasForeignKey(r => r.SteamID64);
+			modelBuilder.Entity<Record>()
+                .HasOne(r => r.Replay)
+                .WithOne(r => r.Record)
+                .HasForeignKey<Replay>(r => r.Id);
         }
     }
 }
