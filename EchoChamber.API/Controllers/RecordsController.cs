@@ -84,7 +84,7 @@ namespace EchoChamber.API.Controllers
             query = query.Skip(recordParameter.Offset.GetValueOrDefault(0));
             query = query.Take(recordParameter.Limit.GetValueOrDefault(100));
 
-            var dbRecords = await query.ToArrayAsync();
+            var dbRecords = await query.OrderByDescending(r => r.Created).ToArrayAsync();
 
             return _mapper.Map<IEnumerable<RecordView>>(dbRecords);
         }
