@@ -47,6 +47,8 @@ namespace EchoChamber.API.Controllers
 
             if (recordParameter.Course != null)
                 query = query.Where(r => recordParameter.Course.Contains(r.Course));
+            else
+                query = query.Where(r => r.Course >= 0);
             
             if (recordParameter.IsBonus.HasValue)
                 query = query.Where(r => recordParameter.IsBonus.Value ? r.Course > 0 : r.Course == 0);
