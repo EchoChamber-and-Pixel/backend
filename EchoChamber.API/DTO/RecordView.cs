@@ -8,6 +8,7 @@ namespace EchoChamber.API.DTO
         public string SteamID64 { get; set; }
         public string PlayerName { get; set; }
         public string MapName { get; set; }
+        public int Time { get; set; }
         public int Course { get; set; }
         public int Style { get; set; }
         public int ModeId { get; set; }
