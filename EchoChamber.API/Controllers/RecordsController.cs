@@ -75,6 +75,8 @@ namespace EchoChamber.API.Controllers
                 query = query.Where(r => modes.Contains(r.Mode));
             }
 
+            query = query.OrderByDescending(r => r.Created);
+
             if (recordParameter.After.HasValue)
                 query = query.Where(r => r.Created > recordParameter.After.Value);
 
@@ -84,7 +86,7 @@ namespace EchoChamber.API.Controllers
             query = query.Skip(recordParameter.Offset.GetValueOrDefault(0));
             query = query.Take(recordParameter.Limit.GetValueOrDefault(100));
 
-            var dbRecords = await query.OrderByDescending(r => r.Created).ToArrayAsync();
+            var dbRecords = await query.ToArrayAsync();
 
             return _mapper.Map<IEnumerable<RecordView>>(dbRecords);
         }
