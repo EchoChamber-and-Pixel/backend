@@ -14,6 +14,7 @@ namespace EchoChamber.API.DTO
         public string Mode => GetModeString(ModeId);
         public int Teleports { get; set; }
         public bool IsPro => Teleports == 0;
+        public string Source { get; set; }
         public DateTime Created { get; set; }
 
         private string GetModeString(int mode)

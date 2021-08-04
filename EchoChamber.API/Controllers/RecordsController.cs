@@ -33,7 +33,7 @@ namespace EchoChamber.API.Controllers
         [HttpGet]
         public async Task<IEnumerable<RecordView>> Get([FromQuery] RecordParameter recordParameter)
         {
-            var db = _db.Records.Include(r => r.Map).Include(r => r.Player);
+            var db = _db.Records.Include(r => r.Map).Include(r => r.Player).Include(r => r.Replay);
             var query = db.AsQueryable();
 
             if (recordParameter.Id != null)
