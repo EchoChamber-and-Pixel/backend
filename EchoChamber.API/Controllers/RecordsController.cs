@@ -43,13 +43,13 @@ namespace EchoChamber.API.Controllers
                 query = query.Where(r => recordParameter.SteamID64.Contains(r.SteamID64));
 
             if (recordParameter.MapName != null)
-                query = query.Where(r => recordParameter.MapName.Contains(r.Map.Name, StringComparer.OrdinalIgnoreCase));
+                query = query.Where(r => r.Map.Name.Contains(recordParameter.MapName.ToLowerInvariant()));
 
             if (recordParameter.Course != null)
                 query = query.Where(r => recordParameter.Course.Contains(r.Course));
             else
                 query = query.Where(r => r.Course >= 0);
-            
+
             if (recordParameter.IsBonus.HasValue)
                 query = query.Where(r => recordParameter.IsBonus.Value ? r.Course > 0 : r.Course == 0);
 
@@ -62,22 +62,25 @@ namespace EchoChamber.API.Controllers
             if (recordParameter.Mode != null)
             {
                 List<int> modes = new List<int>();
-                if (recordParameter.Mode.Contains("kztimer", StringComparer.OrdinalIgnoreCase) 
-                    || recordParameter.Mode.Contains("kzt", StringComparer.OrdinalIgnoreCase) 
+                if (recordParameter.Mode.Contains("kztimer", StringComparer.OrdinalIgnoreCase)
+                    || recordParameter.Mode.Contains("kzt", StringComparer.OrdinalIgnoreCase)
                     || recordParameter.Mode.Contains("2"))
                     modes.Add(2);
-                if (recordParameter.Mode.Contains("simplekz", StringComparer.OrdinalIgnoreCase) 
-                    || recordParameter.Mode.Contains("skz", StringComparer.OrdinalIgnoreCase) 
+                if (recordParameter.Mode.Contains("simplekz", StringComparer.OrdinalIgnoreCase)
+                    || recordParameter.Mode.Contains("skz", StringComparer.OrdinalIgnoreCase)
                     || recordParameter.Mode.Contains("1"))
                     modes.Add(1);
-                if (recordParameter.Mode.Contains("vanilla", StringComparer.OrdinalIgnoreCase) 
-                    || recordParameter.Mode.Contains("vnl", StringComparer.OrdinalIgnoreCase) 
+                if (recordParameter.Mode.Contains("vanilla", StringComparer.OrdinalIgnoreCase)
+                    || recordParameter.Mode.Contains("vnl", StringComparer.OrdinalIgnoreCase)
                     || recordParameter.Mode.Contains("0"))
                     modes.Add(0);
                 query = query.Where(r => modes.Contains(r.Mode));
             }
 
-            query = query.OrderByDescending(r => r.Created);
+            if (recordParameter.MapName != null)
+                query = query.OrderBy(r => r.Time).ThenBy(r => r.Course);
+            else
+                query = query.OrderByDescending(r => r.Created);
 
             if (recordParameter.After.HasValue)
                 query = query.Where(r => r.Created > recordParameter.After.Value);
