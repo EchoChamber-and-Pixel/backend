@@ -24,7 +24,7 @@ namespace EchoChamber.API.Controllers
             _db = db;
             _logger = logger;
         }
-        
+
         [HttpGet]
         public List<string> Get()
         {
@@ -70,6 +70,8 @@ namespace EchoChamber.API.Controllers
                 else
                 {
                     map = await _db.Maps.FirstOrDefaultAsync(m => m.Name == map.Name);
+                    map.LastPlayed = DateTime.UtcNow;
+                    await _db.SaveChangesAsync();
                 }
 
                 // Player
@@ -115,14 +117,16 @@ namespace EchoChamber.API.Controllers
                 };
                 await _db.Replays.AddAsync(replay2);
                 await _db.SaveChangesAsync();
-                return new {
+                return new
+                {
                     Id = record.Id
                 };
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error uploading replay");
-                return new {
+                return new
+                {
                     Id = -1,
                     Message = "Unable to upload replay"
                 };
