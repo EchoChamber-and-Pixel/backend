@@ -78,7 +78,7 @@ namespace EchoChamber.API.Controllers
             }
 
             if (recordParameter.MapName != null)
-                query = query.OrderBy(r => r.Time).ThenBy(r => r.Course);
+                query = query.OrderBy(r => r.Course).ThenBy(r => r.Course);
             else
                 query = query.OrderByDescending(r => r.Created);
 
